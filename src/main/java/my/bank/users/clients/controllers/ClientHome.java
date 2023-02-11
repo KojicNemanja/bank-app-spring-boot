@@ -21,7 +21,8 @@ public class ClientHome {
     @GetMapping("/client")
     @ResponseBody
     public String client_home(HttpSession session,
-                              @RequestParam(value = "Payment", required = false) String pay_status){
+                              @RequestParam(value = "Payment", required = false) String pay_status,
+                              @RequestParam(value = "Edit", required = false) String edit_status){
         User user = (User) session.getAttribute("user");
         HashMap<String, Object> model_data = new HashMap<>();
         Client client = new ClientDAO().getForId(user.getId());
@@ -30,6 +31,9 @@ public class ClientHome {
         model_data.put("transactions", transactions);
         if(pay_status != null){
             model_data.put("Payment", pay_status);
+        }
+        if(edit_status != null){
+            model_data.put("Edit", edit_status);
         }
         return ClientTemplate.render("home", model_data);
     }

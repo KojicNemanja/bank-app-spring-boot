@@ -1,7 +1,7 @@
 package my.bank.users.employees.dao;
 import my.bank.database.DBHandler;
+import my.bank.users.employees.dao.exceptions.UserAlredyExists;
 import my.bank.users.models.User;
-import my.bank.users.status.UserStatus;
 
 import java.sql.*;
 
@@ -26,6 +26,37 @@ public class UserDAO {
                 user.getId());
         dbHandler = new DBHandler();
         return dbHandler.insert_update_delete(query);
+    }
+
+    public int transactional_edit(User user){
+        int result = 0;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        try{
+            dbHandler = new DBHandler();
+            dbHandler.disable_auto_commit();
+            String query =String.format("""
+                    SELECT * FROM `users` WHERE `username` = '%s'""", user.getUsername());
+            ps = dbHandler.getConn().prepareStatement(query);
+            rs = ps.executeQuery();
+            if(rs.next()){
+                throw new UserAlredyExists("Username already exists!");
+            }
+            query = String.format("""
+                UPDATE `users` SET `username`='%s',`password`='%s',`status`='%s'
+                WHERE `person_id` = %d""", user.getUsername(), user.getPassword(), user.getUser_status(),
+                    user.getId());
+            result = dbHandler.insert_update_delete(query);
+            dbHandler.commit();
+        }catch (Exception ex){
+            dbHandler.roll_back();
+            ex.printStackTrace();
+            return 0;
+        }finally {
+            try{rs.close(); ps.close();}catch (Exception ex){}
+            dbHandler.close_connection();
+        }
+        return result;
     }
 
     public User getForUsername(String username){
