@@ -1,3 +1,4 @@
+![Screenshot (11)](https://user-images.githubusercontent.com/76007389/223198639-1b15b877-f07d-4305-9ca9-ddaf77f84475.png)
 Koriscene tehnoligije za izradu ove aplikacije: Spring Boot, Freemarker, MySQL, HTML, CSS, jQuery.
 Apllikacija omogucava korisnicima pracenje stanja racuna kao i slanje novca na drugi racun i pregled svih transakcija.
 Korisnik se prijavljuje korisnickim imenom i lozinkom:
