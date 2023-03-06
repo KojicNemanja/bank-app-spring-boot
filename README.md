@@ -2,8 +2,11 @@ Koriscene tehnoligije za izradu ove aplikacije: Spring Boot, Freemarker, MySQL, 
 Apllikacija omogucava korisnicima pracenje stanja racuna kao i slanje novca na drugi racun i pregled svih transakcija.
 Zaposleni ima mogucnost dodavanja novih klijenata, pretragu klijenata, uplate ili isplate sa racuna klijenata.
 ![Screenshot (3)](https://user-images.githubusercontent.com/76007389/223080716-839a498f-b559-477e-8e6f-04b9d5d983f6.png)
-![Screenshot (8)](https://user-images.githubusercontent.com/76007389/223205690-45642893-2193-4487-b4f0-6e9c858ba867.png)
-![Screenshot (6)](https://user-images.githubusercontent.com/76007389/223205839-77725f4a-7b63-4d00-917f-1b88bd56dc92.png)
+Korisnik:
+![Screenshot (12)](https://user-images.githubusercontent.com/76007389/223223204-b47f19d4-a9c8-4954-946f-13bb5880e55b.png)
+![Screenshot (13)](https://user-images.githubusercontent.com/76007389/223223695-29ac20c5-c94e-4c9c-b664-cbe7fbccdf04.png)
+![Screenshot (14)](https://user-images.githubusercontent.com/76007389/223223701-230d6412-f021-4604-b98d-548b74efb40e.png)
+
 
 
 
