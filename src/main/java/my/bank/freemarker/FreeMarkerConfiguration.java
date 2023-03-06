@@ -20,6 +20,7 @@ public class FreeMarkerConfiguration {
             configuration.setLogTemplateExceptions(false);
             configuration.setWrapUncheckedExceptions(true);
             configuration.setFallbackOnNullLoopVariable(false);
+            configuration.setNumberFormat("computer");
         }
         return configuration;
     }
