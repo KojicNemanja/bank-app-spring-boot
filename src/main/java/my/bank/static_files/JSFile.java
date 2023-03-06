@@ -13,7 +13,7 @@ public class JSFile {
 
     @GetMapping("/js/{file_name}")
     public String read(@PathVariable String file_name) throws IOException {
-        Path js_path = Path.of(System.getenv("JAVA_RESOURCES_E") + String.format("/web_app_test/Static/js/%s", file_name));
+        Path js_path = Path.of(System.getenv("JAVA_RESOURCES") + String.format("/bank_app/Static/js/%s", file_name));
         return Files.readString(js_path);
     }
 

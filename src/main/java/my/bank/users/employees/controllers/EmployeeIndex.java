@@ -1,8 +1,9 @@
 package my.bank.users.employees.controllers;
 
+import freemarker.template.TemplateException;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-import my.bank.users.employees.freemrker.EmployeeTemplate;
+import my.bank.freemarker.Template;
 import my.bank.users.models.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,10 +17,10 @@ public class EmployeeIndex {
 
     @GetMapping("/employee")
     @ResponseBody
-    public String employee(HttpSession session, HttpServletResponse response) throws IOException {
+    public String employee(HttpSession session, HttpServletResponse response) throws IOException, TemplateException {
         User user = (User) session.getAttribute("user");
         HashMap<String, Object> model_data = new HashMap<>();
         model_data.put("user", user);
-        return EmployeeTemplate.render("home", model_data);
+        return Template.render("/employee/home", model_data);
     }
 }

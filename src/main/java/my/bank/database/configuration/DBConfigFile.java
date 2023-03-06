@@ -13,7 +13,7 @@ public class DBConfigFile {
         if(database == null){
             try {
                 ObjectMapper mapper = new ObjectMapper();
-                Path dbconfig_path = Path.of(System.getenv("JAVA_RESOURCES_E") + "/web_app_test/Database/config.json");
+                Path dbconfig_path = Path.of(System.getenv("JAVA_RESOURCES") + "/bank_app/Database/config.json");
                 String json_data = Files.readString(dbconfig_path);
                 database =  mapper.readValue(json_data, Database.class);
             } catch (Exception ex) {

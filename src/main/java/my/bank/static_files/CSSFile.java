@@ -12,7 +12,7 @@ public class CSSFile {
 
     @GetMapping("css/style.css")
     public String read() throws IOException {
-        Path css_path = Path.of(System.getenv("JAVA_RESOURCES_E") + "/web_app_test/Static/css/style.css");
+        Path css_path = Path.of(System.getenv("JAVA_RESOURCES") + "/bank_app/Static/css/style.css");
         return Files.readString(css_path);
     }
 

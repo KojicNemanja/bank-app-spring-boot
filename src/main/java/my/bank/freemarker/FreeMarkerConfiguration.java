@@ -12,7 +12,7 @@ public class FreeMarkerConfiguration {
     public static Configuration getConfiguration() throws IOException {
         if(configuration == null){
             configuration = new Configuration(Configuration.VERSION_2_3_31);
-            String template_path = System.getenv("JAVA_RESOURCES_E") + "/web_app_test/Templates/";
+            String template_path = System.getenv("JAVA_RESOURCES") + "/bank_app/Templates/";
             File template_file = new File(template_path);
             configuration.setDirectoryForTemplateLoading(template_file);
             configuration.setDefaultEncoding("UTF-8");

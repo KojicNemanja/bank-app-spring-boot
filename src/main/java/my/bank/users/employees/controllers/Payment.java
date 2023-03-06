@@ -1,9 +1,10 @@
 package my.bank.users.employees.controllers;
 
+import freemarker.template.TemplateException;
 import jakarta.servlet.http.HttpServletResponse;
+import my.bank.freemarker.Template;
 import my.bank.users.clients.dao.ClientDAO;
 import my.bank.users.clients.models.Client;
-import my.bank.users.employees.freemrker.EmployeeTemplate;
 import my.bank.users.employees.payment.ClientDeposit;
 import my.bank.users.employees.payment.ClientWithdraw;
 import my.bank.users.transaction.models.Transaction;
@@ -21,12 +22,12 @@ public class Payment {
 
     @GetMapping("/employee/payment/{client_acc}")
     @ResponseBody
-    public String payment(@PathVariable(value = "client_acc") String acc){
+    public String payment(@PathVariable(value = "client_acc") String acc) throws TemplateException, IOException {
         ClientDAO clientDAO = new ClientDAO();
         Client client = clientDAO.getForAccNumber(acc);
         HashMap<String, Object> model_data = new HashMap<>();
         model_data.put("client", client);
-        return EmployeeTemplate.render("payment", model_data);
+        return Template.render("/employee/payment", model_data);
     }
 
     @PostMapping("/employee/payment/{payment_type}/{client_acc}")

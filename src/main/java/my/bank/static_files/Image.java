@@ -15,7 +15,7 @@ public class Image {
     @GetMapping("/image/{img_name}")
     @ResponseBody
     public byte[] read(@PathVariable(value = "img_name") String img) throws IOException {
-        Path css_path = Path.of(System.getenv("JAVA_RESOURCES_E") + "/web_app_test/Static/images/" + img);
+        Path css_path = Path.of(System.getenv("JAVA_RESOURCES") + "/bank_app/Static/images/" + img);
         return Files.readAllBytes(css_path);
     }
 }

@@ -1,8 +1,9 @@
 package my.bank.users.clients.controllers;
 
+import freemarker.template.TemplateException;
 import jakarta.servlet.http.HttpSession;
+import my.bank.freemarker.Template;
 import my.bank.users.clients.dao.ClientDAO;
-import my.bank.users.clients.freemarker.ClientTemplate;
 import my.bank.users.clients.models.Client;
 import my.bank.users.models.User;
 import my.bank.users.transaction.dao.TransactionDAO;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -22,7 +24,7 @@ public class ClientHome {
     @ResponseBody
     public String client_home(HttpSession session,
                               @RequestParam(value = "Payment", required = false) String pay_status,
-                              @RequestParam(value = "Edit", required = false) String edit_status){
+                              @RequestParam(value = "Edit", required = false) String edit_status) throws TemplateException, IOException {
         User user = (User) session.getAttribute("user");
         HashMap<String, Object> model_data = new HashMap<>();
         Client client = new ClientDAO().getForId(user.getId());
@@ -35,6 +37,6 @@ public class ClientHome {
         if(edit_status != null){
             model_data.put("Edit", edit_status);
         }
-        return ClientTemplate.render("home", model_data);
+        return Template.render("/client/home", model_data);
     }
 }

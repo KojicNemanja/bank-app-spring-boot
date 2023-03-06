@@ -1,10 +1,11 @@
 package my.bank.users.employees.controllers;
 
+import freemarker.template.TemplateException;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import my.bank.freemarker.Template;
 import my.bank.users.clients.dao.ClientDAO;
 import my.bank.users.clients.models.Client;
-import my.bank.users.employees.freemrker.EmployeeTemplate;
 import my.bank.users.models.Address;
 import my.bank.users.models.User;
 import org.springframework.stereotype.Controller;
@@ -20,7 +21,7 @@ public class AddClient {
     @ResponseBody
     public String open_acc_input(HttpSession session,
                                  @RequestParam(name = "Save", required = false) String save
-                                 ) throws IOException {
+                                 ) throws IOException, TemplateException {
         if (save != null){
             HashMap<String, Object> model_data = new HashMap<>();
             model_data.put("Save", save);
@@ -29,9 +30,9 @@ public class AddClient {
                 model_data.put("NewClient", client);
                 session.removeAttribute("new_client");
             }
-            return EmployeeTemplate.render("add_client", model_data);
+            return Template.render("/employee/add_client", model_data);
         }
-        return EmployeeTemplate.render("add_client");
+        return Template.render("/employee/add_client");
     }
 
     @PostMapping("/employee/add_client")

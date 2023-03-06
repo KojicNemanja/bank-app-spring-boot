@@ -1,8 +1,9 @@
 package my.bank.users.clients.controllers;
 
+import freemarker.template.TemplateException;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-import my.bank.users.clients.freemarker.ClientTemplate;
+import my.bank.freemarker.Template;
 import my.bank.users.employees.dao.UserDAO;
 import my.bank.users.models.User;
 import org.springframework.stereotype.Controller;
@@ -18,11 +19,11 @@ public class EditProfilData {
 
     @GetMapping("/client/edit")
     @ResponseBody
-    public String edit_profil(HttpSession session){
+    public String edit_profil(HttpSession session) throws TemplateException, IOException {
         User user = (User) session.getAttribute("user");
         HashMap<String, Object> model_data = new HashMap<>();
         model_data.put("user", user);
-        return ClientTemplate.render("edit_data", model_data);
+        return Template.render("/client/edit_data", model_data);
     }
 
     @PostMapping("/client/edit")

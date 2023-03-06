@@ -1,9 +1,10 @@
 package my.bank.users.clients.controllers;
 
+import freemarker.template.TemplateException;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import my.bank.freemarker.Template;
 import my.bank.users.clients.dao.ClientDAO;
-import my.bank.users.clients.freemarker.ClientTemplate;
 import my.bank.users.clients.models.Client;
 import my.bank.users.clients.payment.ClientSend;
 import my.bank.users.models.User;
@@ -22,13 +23,13 @@ public class SendMoney {
 
     @GetMapping("/client/send")
     @ResponseBody
-    public String send(HttpSession session){
+    public String send(HttpSession session) throws TemplateException, IOException {
         User user = (User) session.getAttribute("user");
         ClientDAO clientDAO = new ClientDAO();
         Client client = clientDAO.getForId(user.getId());
         HashMap<String, Object> model_data = new HashMap<>();
         model_data.put("client", client);
-        return ClientTemplate.render("send_money", model_data);
+        return Template.render("/client/send_money", model_data);
     }
 
     @PostMapping("/client/send")

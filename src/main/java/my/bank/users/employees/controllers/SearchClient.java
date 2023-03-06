@@ -1,9 +1,10 @@
 package my.bank.users.employees.controllers;
 
+import freemarker.template.TemplateException;
 import jakarta.servlet.http.HttpServletResponse;
+import my.bank.freemarker.Template;
 import my.bank.users.clients.dao.ClientDAO;
 import my.bank.users.clients.models.Client;
-import my.bank.users.employees.freemrker.EmployeeTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
@@ -20,7 +21,7 @@ public class SearchClient {
                          @RequestParam(value = "Payment", required = false) String payment_status,
                          @RequestParam(value = "EditClient", required = false) String edit_status,
                          @RequestParam(value = "ClientBan", required = false) String ban_status,
-                         HttpServletResponse response) throws IOException {
+                         HttpServletResponse response) throws IOException, TemplateException {
         Client client;
         ClientDAO clientDAO = new ClientDAO();
         if(option.equals("acc")) {
@@ -40,7 +41,7 @@ public class SearchClient {
             if(ban_status != null){
                 model_data.put("ban_status", ban_status);
             }
-            return EmployeeTemplate.render("search_client", model_data);
+            return Template.render("/employee/search_client", model_data);
         }
         return  "Invalid data!";
     }

@@ -1,11 +1,12 @@
 package my.bank.users.employees.controllers;
 
+import freemarker.template.TemplateException;
 import jakarta.servlet.http.HttpServletResponse;
+import my.bank.freemarker.Template;
 import my.bank.users.clients.account.model.Account;
 import my.bank.users.clients.account.model.AccountStatus;
 import my.bank.users.clients.dao.ClientDAO;
 import my.bank.users.clients.models.Client;
-import my.bank.users.employees.freemrker.EmployeeTemplate;
 import my.bank.users.models.Address;
 import my.bank.users.models.User;
 import my.bank.users.status.UserStatus;
@@ -24,12 +25,12 @@ public class EditClient {
 
     @GetMapping("/employee/client/edit/{client_id}")
     @ResponseBody
-    public String edit(@PathVariable(value = "client_id") int client_id){
+    public String edit(@PathVariable(value = "client_id") int client_id) throws TemplateException, IOException {
         ClientDAO clientDAO = new ClientDAO();
         Client client = clientDAO.getForId(client_id);
         HashMap<String, Object> model_data = new HashMap<>();
         model_data.put("client", client);
-        return EmployeeTemplate.render("edit_client", model_data);
+        return Template.render("/employee/edit_client", model_data);
     }
 
     @PostMapping("/employee/client/edit/{client_id}")
